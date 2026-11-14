@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="bn" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Land Measurement & Survey Calculator | জমি পরিমাপ ও ডেভেলপার পোর্টফোলিও</title>
+    <meta name="description" content="পেশাদার জমি পরিমাপ ক্যালকুলেটর (শতাংশ, কাঠা, বিঘা, একর, বর্গফুট)। জমি মাপার আধুনিক টুল এবং কাস্টম ওয়েবসাইট বা মোবাইল অ্যাপ অর্ডার করার জন্য যোগাযোগ করুন। Developed by Developer Rakib Attari.">
+    <meta name="keywords" content="Land Measurement, জমি পরিমাপ ক্যালকুলেটর, শতাংশ কাঠা বিঘা হিসাব, জমিটার মাপ, Web Development BD, Developer Rakib Attari">
+    <meta name="author" content="Developer Rakib Attari">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Hind Siliguri & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Hind Siliguri"', 'Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #166534 0%, #0f172a 60%, #020617 100%);
+        }
+        .card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #22c55e;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Top Announcement Bar -->
+    <div class="bg-brand-700 text-white text-xs sm:text-sm py-2 px-4 font-medium text-center relative z-50 shadow-md">
+        <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2">
+            <span class="bg-white/20 px-2 py-0.5 rounded text-xs font-bold animate-pulse">প্রো অফার</span>
+            <span>যেকোনো ওয়েবসাইট বা মোবাইল অ্যাপ ডেভেলপ করাতে সরাসরি হোয়াটসঅ্যাপে অর্ডার করুন!</span>
+            <a href="https://wa.me/8801875489015?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B2%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE,%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BF%20%E0%A6%93%E0%A6%AF%E0%A7%8F%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F/%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%20%E0%A6%AC%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" class="underline font-bold hover:text-yellow-200">
+                <i class="fa-brands fa-whatsapp mr-1"></i> চ্যাট করুন (+880 1875-489015)
+            </a>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="glass-nav sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-ruler-combined text-xl text-white"></i>
+                    </div>
+                    <div>
+                        <span class="font-bold text-lg sm:text-xl tracking-tight block leading-none text-white">Land Measure BD</span>
+                        <span class="text-xs text-brand-400 font-medium">জমি পরিমাপ ও ডেভেলপার পোর্টফোলিও</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <a href="#calculator" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">ক্যালকুলেটর</a>
+                    <a href="#units" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">পরিমাপের নিয়ম</a>
+                    <a href="#services" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">সফটওয়্যার সেবা</a>
+                    <a href="#about" class="px-3 py-2 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition">ডেভেলপার পরিচিতি</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex items-center gap-3">
+                    <a href="https://wa.me/8801875489015?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B2%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE,%20%E0%A6%85%E0%A6%B0%E0%A7%8D%E0%A6%A1%E0%A6%BE%E0%A6%B0%20%E0%A6%95%E0%A6%B0%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" 
+                       class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-brand-600/30 transition transform active:scale-95">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>অ্যাপ/ওয়েবসাইট অর্ডার</span>
+                    </a>
+                    <button id="mobileMenuBtn" class="md:hidden p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800 focus:outline-none">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-t border-slate-800 px-4 pt-3 pb-5 space-y-2">
+            <a href="#calculator" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800">ক্যালকুলেটর</a>
+            <a href="#units" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800">পরিমাপের নিয়ম</a>
+            <a href="#services" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800">সফটওয়্যার সেবা</a>
+            <a href="#about" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800">ডেভেলপার পরিচিতি</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-gradient text-white relative overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-32 border-b border-slate-800">
+        <div class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] opacity-60"></div>
+        <div class="absolute top-1/4 -right-20 w-96 h-96 bg-brand-600/10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-10 -left-20 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 border border-brand-500/30 text-brand-400 text-xs sm:text-sm font-semibold mb-6">
+                        <span class="w-2 h-2 rounded-full bg-brand-500 animate-ping"></span>
+                        <span>ডিজিটাল বাংলাদেশ সার্ভে ও পরিমাপ প্রযুক্তি</span>
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight mb-6">
+                        আধুনিক <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-emerald-300 to-teal-400">জমি পরিমাপ ও হিসাব</span> ক্যালকুলেটর
+                    </h1>
+                    
+                    <p class="text-slate-300 text-base sm:text-lg lg:text-xl max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed">
+                        বর্গফুট থেকে খুব সহজেই শতাংশ, কাঠা, বিঘা এবং একরে জমির সঠিক হিসাব করুন নিমিষেই। জমি মাপার বিশ্বস্ত ডিজিটাল টুল এবং কাস্টম প্রফেশনাল ওয়েবসাইট ও মোবাইল অ্যাপ অর্ডার করতে আজই যোগাযোগ করুন।
+                    </p>
+
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4">
+                        <a href="#calculator" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-7 py-4 rounded-2xl shadow-xl shadow-brand-600/30 transition flex items-center gap-2.5 text-base">
+                            <i class="fa-solid fa-calculator"></i>
+                            <span>হিসাব করুন এখনই</span>
+                        </a>
+                        <a href="https://wa.me/8801875489015?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B2%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE,%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BF%20%E0%A6%93%E0%A6%AF%E0%A7%8F%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F/%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%20%E0%A6%AC%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%A4%E0%A7%8%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer" 
+                           class="bg-slate-800 hover:bg-slate-700 border border-slate-700 text-white font-bold px-7 py-4 rounded-2xl transition flex items-center gap-2.5 text-base">
+                            <i class="fa-brands fa-whatsapp text-emerald-400 text-xl"></i>
+                            <span>সরাসরি অর্ডার করুন</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust Badges -->
+                    <div class="grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 mt-12 pt-8 border-t border-slate-800">
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-white">১০০%</div>
+                            <div class="text-xs sm:text-sm text-slate-400 font-medium">নির্ভুল হিসাব</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-brand-400">২৪/৭</div>
+                            <div class="text-xs sm:text-sm text-slate-400 font-medium">সাপোর্ট ও সেবা</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400">কাস্টম</div>
+                            <div class="text-xs sm:text-sm text-slate-400 font-medium">ওয়েব ও অ্যাপ সলিউশন</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Illustration / Quick Feature Card -->
+                <div class="lg:col-span-5">
+                    <div class="bg-slate-800/80 border border-slate-700/80 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden backdrop-blur-md">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-brand-500/10 rounded-bl-full"></div>
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-brand-400">দ্রুত হিসাব</span>
+                                <h3 class="text-2xl font-bold text-white mt-0.5">এক নজরে পরিমাপ</h3>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl bg-brand-500/20 border border-brand-500/30 flex items-center justify-center text-brand-400 animate-float">
+                                <i class="fa-solid fa-chart-pie text-xl"></i>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4 text-sm">
+                            <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-between">
+                                <span class="text-slate-300 font-medium">১ শতাংশ (Decimal) =</span>
+                                <span class="font-bold text-brand-400">৪৩৫.৬ বর্গফুট</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-between">
+                                <span class="text-slate-300 font-medium">১ কাঠা (Katha) =</span>
+                                <span class="font-bold text-brand-400">৭২০ বর্গফুট</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-between">
+                                <span class="text-slate-300 font-medium">১ বিঘা (Bigha) =</span>
+                                <span class="font-bold text-brand-400">১৪,৪০০ বর্গফুট (২০ কাঠা)</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-slate-900/90 border border-slate-700/80 flex items-center justify-between">
+                                <span class="text-slate-300 font-medium">১ একর (Acre) =</span>
+                                <span class="font-bold text-brand-400">৪৩,৫৬০ বর্গফুট (১০০ শতাংশ)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Interactive Land Calculator Section -->
+    <section id="calculator" class="py-20 bg-slate-900">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-brand-400 font-bold text-sm tracking-wider uppercase">ডিজিটাল টুলস</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">জমি পরিমাপ ক্যালকুলেটর</h2>
+                <p class="text-slate-400 mt-3 text-base">আপনার জমির মোট বর্গফুট (Square Feet) অথবা দৈর্ঘ্য ও প্রস্থ ইনপুট দিয়ে খুব সহজেই শতাংশ, কাঠা, বিঘা এবং একরে হিসাব বের করুন।</p>
+            </div>
+
+            <div class="bg-slate-800/90 border border-slate-700 rounded-3xl p-6 sm:p-10 shadow-2xl backdrop-blur-md">
+                <!-- Mode Toggle Tabs -->
+                <div class="flex rounded-2xl bg-slate-900 p-1.5 mb-8 border border-slate-700">
+                    <button onclick="switchMode('sqft')" id="tabSqft" class="flex-1 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-brand-600 text-white shadow-md">
+                        <i class="fa-solid fa-ruler-horizontal mr-2"></i>বর্গফুট থেকে হিসাব
+                    </button>
+                    <button onclick="switchMode('dims')" id="tabDims" class="flex-1 py-3 rounded-xl font-bold text-sm sm:text-base transition text-slate-400 hover:text-white">
+                        <i class="fa-solid fa-draw-polygon mr-2"></i>দৈর্ঘ্য ও প্রস্থ থেকে হিসাব
+                    </button>
+                </div>
+
+                <!-- Input Mode 1: Square Feet -->
+                <div id="modeSqft" class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-300 mb-2">মোট জমির পরিমাণ (বর্গফুট / Sq Ft)</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-square"></i></span>
+                            <input type="number" id="inputSqft" placeholder="যেমন: ৪৩৫৬" oninput="calculateFromSqft()"
+                                class="w-full bg-slate-900 text-white placeholder-slate-500 pl-11 pr-4 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-brand-500 text-lg font-medium">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Mode 2: Length x Width -->
+                <div id="modeDims" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-300 mb-2">দৈর্ঘ্য (ফুট)</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-arrows-up-down"></i></span>
+                            <input type="number" id="inputLength" placeholder="যেমন: ১০০" oninput="calculateFromDims()"
+                                class="w-full bg-slate-900 text-white placeholder-slate-500 pl-11 pr-4 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-brand-500 text-lg font-medium">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-slate-300 mb-2">প্রস্থ (ফুট)</label>
+                        <div class="relative">
+                            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"><i class="fa-solid fa-arrows-left-right"></i></span>
+                            <input type="number" id="inputWidth" placeholder="যেমন: ৫০" oninput="calculateFromDims()"
+                                class="w-full bg-slate-900 text-white placeholder-slate-500 pl-11 pr-4 py-4 rounded-2xl border border-slate-700 focus:outline-none focus:border-brand-500 text-lg font-medium">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Grid -->
+                <div class="mt-10 pt-8 border-t border-slate-700/80">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-square-poll-vertical text-brand-400"></i>
+                        <span>হিসাবের ফলাফল</span>
+                    </h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- Decimal / Sotomsho -->
+                        <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-5 text-center">
+                            <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">শতাংশ (Decimal)</div>
+                            <div id="resDecimal" class="text-3xl font-extrabold text-brand-400 mt-2">০.০০</div>
+                            <div class="text-xs text-slate-500 mt-1">৪৩৫.৬ বর্গফুট = ১ শতাংশ</div>
+                        </div>
+
+                        <!-- Katha -->
+                        <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-5 text-center">
+                            <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">কাঠা (Katha)</div>
+                            <div id="resKatha" class="text-3xl font-extrabold text-emerald-400 mt-2">০.০০</div>
+                            <div class="text-xs text-slate-500 mt-1">৭২০ বর্গফুট = ১ কাঠা</div>
+                        </div>
+
+                        <!-- Bigha -->
+                        <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-5 text-center">
+                            <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">বিঘা (Bigha)</div>
+                            <div id="resBigha" class="text-3xl font-extrabold text-teal-400 mt-2">০.০০</div>
+                            <div class="text-xs text-slate-500 mt-1">২০ কাঠা = ১ বিঘা</div>
+                        </div>
+
+                        <!-- Acre -->
+                        <div class="bg-slate-900/90 border border-slate-700/80 rounded-2xl p-5 text-center">
+                            <div class="text-xs uppercase tracking-wider text-slate-400 font-semibold">একর (Acre)</div>
+                            <div id="resAcre" class="text-3xl font-extrabold text-cyan-400 mt-2">০.০০</div>
+                            <div class="text-xs text-slate-500 mt-1">১০০ শতাংশ = ১ একর</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Standard Measurement Info Section -->
+    <section id="units" class="py-20 bg-slate-950 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-brand-400 font-bold text-sm tracking-wider uppercase">জমি মাপার একক</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1">বাংলাদেশে প্রচলিত জমির পরিমাপ পদ্ধতি</h2>
+                <p class="text-slate-400 mt-3 text-base">জমি কেনাবেচা বা পরিমাপের সময় সঠিক ধারণা রাখতে নিচের পরিমাপগুলো জেনে রাখা জরুরি।</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-400 flex items-center justify-center text-2xl mb-5 font-bold">
+                        ১
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">শতাংশ (Decimal)</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                        সাধারণত সরকারি দলিলে ও জমি পরিমাপে শতাংশ বা শতক বহুল ব্যবহৃত হয়।
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 text-xs font-semibold text-brand-400">
+                        ১ শতাংশ = ৪৩৫.৬ বর্গফুট
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-5 font-bold">
+                        ২
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">কাঠা (Katha)</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                        শহরের প্লট বা আবাসিক জমি কেনাবেচায় কাঠা এককের হিসাব সবচেয়ে বেশি করা হয়।
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 text-xs font-semibold text-emerald-400">
+                        ১ কাঠা = ৭২০ বর্গফুট
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-2xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-2xl mb-5 font-bold">
+                        ৩
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">বিঘা (Bigha)</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                        গ্রামঞ্চলে কৃষি জমি বা বড় জমির পরিমাপে বিঘা একক ব্যাপকভাবে ব্যবহৃত হয়।
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 text-xs font-semibold text-teal-400">
+                        ১ বিঘা = ২০ কাঠা (১৪,৪০০ বর্গফুট)
+                    </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 card-hover">
+                    <div class="w-14 h-14 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center text-2xl mb-5 font-bold">
+                        ৪
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">একর (Acre)</h3>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-4">
+                        বড় আকারের প্রজেক্ট, মিল-কারখানা বা বিস্তৃত জমির পরিমাপে একর হিসাব করা হয়।
+                    </p>
+                    <div class="pt-4 border-t border-slate-800 text-xs font-semibold text-cyan-400">
+                        ১ একর = ১০০ শতাংশ (৪৩,৫৬০ বর্গফুট)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services / Order Section -->
+    <section id="services" class="py-20 bg-slate-900 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-6">
+                    <span class="text-brand-400 font-bold text-sm tracking-wider uppercase">সফটওয়্যার ও ওয়েব ডেভেলপমেন্ট</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-1 mb-6">আপনার ব্যবসার জন্য কাস্টম ওয়েবসাইট বা মোবাইল অ্যাপ তৈরি করুন</h2>
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed mb-6">
+                        আপনি কি আপনার নিজের জমি পরিমাপ ওয়েবসাইট, ই-কমার্স সাইট, ব্লগ বা অ্যান্ড্রয়েড অ্যাপ তৈরি করতে চান? পেশাদার ডেভেলপার দিয়ে আপনার আইডিয়াকে বাস্তবে রূপ দিন খুব সাশ্রয়ী মূল্যে।
+                    </p>
+                    
+                    <ul class="space-y-3.5 text-sm sm:text-base text-slate-300 mb-8">
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-brand-400 text-lg"></i>
+                            <span>সম্পূর্ণ রেসপন্সিভ ও এসইও-ফ্রেন্ডলি (SEO Optimized) ওয়েবসাইট ডিজাইন</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-brand-400 text-lg"></i>
+                            <span>গুগল সার্চ কনসোল ও র‍্যাঙ্কিং গ্যারান্টি</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i class="fa-solid fa-circle-check text-brand-400 text-lg"></i>
+                            <span>হোয়াটসঅ্যাপ অর্ডার বা ডైরেক্ট চ্যাট ইন্টিগ্রেশন</span>
+                        </li>
+                    </ul>
+
+                    <a href="https://wa.me/8801875489015?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B2%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE,%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BF%20%E0%A6%93%E0%A6%AF%E0%A7%8F%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F/%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%20%E0%A6%AD%E0%A6%BE%E0%A6%B0%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%AC%E0%A6%BE%E0%A6%A3%E0%A6%BE%E0%A6%A4%E0%A7%87%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer"
+                       class="inline-flex items-center gap-3 bg-brand-600 hover:bg-brand-500 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-brand-600/30 transition text-base">
+                        <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        <span>হোয়াটসঅ্যাপে সরাসরি অর্ডার করুন</span>
+                    </a>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <div class="bg-gradient-to-br from-slate-800 to-slate-900 border border-brand-500/30 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-40 h-40 bg-brand-500/10 rounded-full blur-2xl"></div>
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-16 h-16 rounded-2xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-3xl font-bold border border-brand-500/30">
+                                <i class="fa-solid fa-headset"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">অর্ডার করার প্রক্রিয়া</h3>
+                                <p class="text-sm text-slate-400">খub সহজ ৩টি ধপ</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-700">
+                                <div class="w-8 h-8 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0">১</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">আপনার আইডিয়া শেয়ার করুন</h4>
+                                    <p class="text-xs text-slate-400 mt-0.5">কী ধরনের ওয়েবসাইট বা অ্যাপ চান তা হোয়াটসঅ্যাপে আমাদের জানান।</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-700">
+                                <div class="w-8 h-8 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0">২</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">বাজেট ও সময় নির্ধারণ</h4>
+                                    <p class="text-xs text-slate-400 mt-0.5">খুব স্বল্প খরচে এবং দ্রুততম সময়ে ডেলিভারি নিশ্চিত করা হয়।</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-4 p-4 rounded-2xl bg-slate-900/90 border border-slate-700">
+                                <div class="w-8 h-8 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center shrink-0">৩</div>
+                                <div>
+                                    <h4 class="font-bold text-white text-base">লাইভ পাবলিশিং</h4>
+                                    <p class="text-xs text-slate-400 mt-0.5">আপনার ডোমেন ও হোস্টিংয়ে প্রজেক্ট লাইভ করে দেওয়া হয়।</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer with About Us -->
+    <footer id="about" class="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
+                <!-- Col 1: About Platform -->
+                <div class="lg:col-span-5">
+                    <div class="flex items-center gap-3 text-white mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white font-bold">
+                            <i class="fa-solid fa-ruler-combined"></i>
+                        </div>
+                        <span class="font-bold text-xl">Land Measure BD</span>
+                    </div>
+                    <p class="text-sm leading-relaxed mb-6">
+                        বাংলাদেশি ব্যবহারকারীদের জন্য জমি পরিমাপের সহজ হিসাব এবং আধুনিক ওয়েব সলিউশন প্রদানের একটি বিশ্বস্ত ডিজিটাল প্ল্যাটফর্ম।
+                    </p>
+                    <div class="flex items-center gap-3">
+                        <a href="https://wa.me/8801875489015" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 hover:bg-brand-600 text-white flex items-center justify-center transition border border-slate-800">
+                            <i class="fa-brands fa-whatsapp text-lg"></i>
+                        </a>
+                        <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 hover:bg-slate-800 text-white flex items-center justify-center transition border border-slate-800">
+                            <i class="fa-brands fa-github text-lg"></i>
+                        </a>
+                        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-xl bg-slate-900 hover:bg-blue-600 text-white flex items-center justify-center transition border border-slate-800">
+                            <i class="fa-brands fa-facebook-f text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div class="lg:col-span-3">
+                    <h4 class="text-white font-bold text-base mb-4">দ্রুত লিংক</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#calculator" class="hover:text-brand-400 transition">জমি পরিমাপ ক্যালকুলেটর</a></li>
+                        <li><a href="#units" class="hover:text-brand-400 transition">শতাংশ ও কাঠার হিসাব</a></li>
+                        <li><a href="#services" class="hover:text-brand-400 transition">ওয়েবসাইট অর্ডার সার্ভিস</a></li>
+                        <li><a href="#about" class="hover:text-brand-400 transition">ডেভেলপার পরিচিতি</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: About Us (Developer Rakib Attari) -->
+                <div class="lg:col-span-4">
+                    <h4 class="text-white font-bold text-base mb-4">About Us (ডেভেলপার পরিচিতি)</h4>
+                    <div class="bg-slate-900/90 border border-slate-800 rounded-2xl p-4">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-white font-bold text-lg shrink-0">
+                                RA
+                            </div>
+                            <div>
+                                <h5 class="text-white font-bold text-sm">Developer Rakib Attari</h5>
+                                <p class="text-xs text-brand-400">Mobile App & Web Developer</p>
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            আমি একজন সেলফ-টগট ফ্রিল্যান্স মোবাইল অ্যাপ ও ওয়েব ডেভেলপার। প্রফেশনাল এবং এসইও-ফ্রেন্ডলি ওয়েবসাইট ও অ্যাপ্লিকেশন তৈরিতে আমি কাজ করে থাকি। আপনার যেকোনো প্রোজেক্টের প্রয়োজনে হোয়াটসঅ্যাপে সরাসরি যোগাযোগ করতে পারেন।
+                        </p>
+                        <div class="mt-3 pt-3 border-t border-slate-800 flex items-center justify-between text-xs">
+                            <span class="text-slate-400"><i class="fa-solid fa-phone mr-1"></i> +880 1875-489015</span>
+                            <a href="https://wa.me/8801875489015" target="_blank" rel="noopener noreferrer" class="text-brand-400 font-bold hover:underline">মেসেজ দিন <i class="fa-solid fa-arrow-right ml-1"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+                <p>&copy; ২০২৬ Land Measure BD. সর্বস্বত্ব সংরক্ষিত।</p>
+                <p>Designed & Developed by <a href="https://wa.me/8801875489015" target="_blank" rel="noopener noreferrer" class="text-white font-semibold hover:text-brand-400 transition">Developer Rakib Attari</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/8801875489015?text=%E0%A6%86%E0%A6%B8%E0%A6%B8%E0%A6%BE%E0%A6%AE%E0%A6%BE%E0%A6%B2%E0%A7%81%20%E0%A6%86%E0%A6%B2%E0%A6%BE%E0%A6%87%E0%A6%95%E0%A7%81%E0%A6%AE,%20%E0%A6%86%E0%A6%AE%E0%A6%BF%20%E0%A6%8F%E0%A6%95%E0%A6%9F%E0%A6%BF%20%E0%A6%93%E0%A6%AF%E0%A7%8F%E0%A6%AC%E0%A6%B8%E0%A6%BE%E0%A6%87%E0%A6%9F/%E0%A6%85%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%AA%20%E0%A6%AC%E0%A6%BE%E0%A6%A8%E0%A6%BE%E0%A6%A4%E0%A7%8%20%E0%A6%9A%E0%A6%BE%E0%A6%87%E0%A5%A4" target="_blank" rel="noopener noreferrer"
+       class="fixed bottom-6 right-6 z-50 bg-emerald-600 hover:bg-emerald-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition transform hover:scale-110 group" title="হোয়াটসঅ্যাপে অর্ডার বা যোগাযোগ করুন">
+        <i class="fa-brands fa-whatsapp text-3xl"></i>
+        <span class="absolute right-16 bg-slate-900 text-white text-xs font-semibold px-3 py-1.5 rounded-xl shadow-lg opacity-0 group-hover:opacity-100 transition whitespace-nowrap border border-slate-700 pointer-events-none">
+            অর্ডার বা যোগাযোগ করুন
+        </span>
+    </a>
+
+    <!-- Calculator JavaScript -->
+    <script>
+        let currentMode = 'sqft';
+
+        function switchMode(mode) {
+            currentMode = mode;
+            const tabSqft = document.getElementById('tabSqft');
+            const tabDims = document.getElementById('tabDims');
+            const modeSqft = document.getElementById('modeSqft');
+            const modeDims = document.getElementById('modeDims');
+
+            if (mode === 'sqft') {
+                tabSqft.className = "flex-1 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-brand-600 text-white shadow-md";
+                tabDims.className = "flex-1 py-3 rounded-xl font-bold text-sm sm:text-base transition text-slate-400 hover:text-white";
+                modeSqft.classList.remove('hidden');
+                modeDims.classList.add('hidden');
+                calculateFromSqft();
+            } else {
+                tabDims.className = "flex-1 py-3 rounded-xl font-bold text-sm sm:text-base transition bg-brand-600 text-white shadow-md";
+                tabSqft.className = "flex-1 py-3 rounded-xl font-bold text-sm sm:text-base transition text-slate-400 hover:text-white";
+                modeDims.classList.remove('hidden');
+                modeSqft.classList.add('hidden');
+                calculateFromDims();
+            }
+        }
+
+        function updateResults(sqft) {
+            if (isNaN(sqft) || sqft < 0) sqft = 0;
+
+            // 1 Decimal = 435.6 sq ft
+            const decimal = sqft / 435.6;
+            // 1 Katha = 720 sq ft
+            const katha = sqft / 720;
+            // 1 Bigha = 14400 sq ft (20 Katha)
+            const bigha = sqft / 14400;
+            // 1 Acre = 43560 sq ft (100 Decimal)
+            const acre = sqft / 43560;
+
+            document.getElementById('resDecimal').textContent = decimal.toFixed(2);
+            document.getElementById('resKatha').textContent = katha.toFixed(2);
+            document.getElementById('resBigha').textContent = bigha.toFixed(3);
+            document.getElementById('resAcre').textContent = acre.toFixed(4);
+        }
+
+        function calculateFromSqft() {
+            const sqft = parseFloat(document.getElementById('inputSqft').value) || 0;
+            updateResults(sqft);
+        }
+
+        function calculateFromDims() {
+            const length = parseFloat(document.getElementById('inputLength').value) || 0;
+            const width = parseFloat(document.getElementById('inputWidth').value) || 0;
+            const sqft = length * width;
+            updateResults(sqft);
+        }
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+    </script>
+</body>
+</html>
